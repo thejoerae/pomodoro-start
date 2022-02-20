@@ -18,8 +18,12 @@ timer = None
 
 
 def reset_timer():
-    global timer
     window.after_cancel(timer)
+    timer_title.config(text="Timer")
+    check_mark.config(text="")
+    canvas.itemconfig (timer_text, text="00:00")
+    global reps
+    reps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
@@ -50,6 +54,7 @@ def count_down(count):
         count_sec = f"0{count_sec}"
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
+        global timer
         timer = window.after(1000, count_down, count - 1)
     else:
         start_timer()
